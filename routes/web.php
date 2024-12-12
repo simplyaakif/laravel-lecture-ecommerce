@@ -4,11 +4,15 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ProductController::class, 'index'])
-    ->name('products.index');
+Route::get('/', function (){
+    return view('welcome');
+})->name('home');
 
 Route::get('/blogs', [BlogController::class, 'index'])
     ->name('blogs.index');
+
+Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])
+    ->name('blogs.show');
 
 Route::middleware([
     'auth:sanctum',
